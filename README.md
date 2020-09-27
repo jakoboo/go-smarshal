@@ -13,26 +13,27 @@ Smarshal (SMARt + unMARSHAL)
 ```go
 type User struct {
 	ID       uint   `json:"id"`
-	HasPaid  bool   `json:"hasPaid"`
-}
-
-type PersonalInfo struct {
 	Email    string `json:"email"`
 	Username string `json:"username"`
+}
+
+type Meta struct {
+	RequestID string `json:"requestID"`
 }
 ```
 
 ```go
 user := &User{
 	ID:      1,
-	HasPaid: false,
-}
-personalInfo := &PersonalInfo{
 	Email:    "mail@example.com",
 	Username: "example",
+
+}
+meta := &Meta{
+	RequestID: "be700d399b9761c5f021a8774b304175",
 }
 
-b, err := smarshal.Marshal(user, personalInfo)
+b, err := smarshal.Marshal(user, meta)
 if err != nil {
 	...
 }
@@ -45,7 +46,7 @@ Marshal will return combined struct like below:
   "id": 1,
   "email": "mail@example.com",
   "username": "example",
-  "hasPaid": false
+  "requestID": "be700d399b9761c5f021a8774b304175"
 }
 ```
 
@@ -56,7 +57,8 @@ Consider this possible API responses:
 ```json
 {
   "status": "failed",
-  "error": "Something went really bad! :c"
+  "error": "Something went really bad! :c",
+  "requestID": "be700d399b9761c5f021a8774b304175"
 }
 ```
 
@@ -65,7 +67,7 @@ Consider this possible API responses:
   "id": 1,
   "email": "mail@example.com",
   "username": "example",
-  "hasPaid": false
+  "requestID": "be700d399b9761c5f021a8774b304175"
 }
 ```
 
@@ -84,18 +86,17 @@ type User struct {
 	HasPaid  bool   `json:"hasPaid"`
 }
 
-type PersonalInfo struct {
-	Email    string `json:"email"`
-	Username string `json:"username"`
+type Meta struct {
+	RequestID string `json:"requestID"`
 }
 ```
 
 ```go
 customErr := &CustomError{}
 user := &User{}
-personalInfo := &PersonalInfo{}
+meta := &Meta{}
 
-err := smarshal.Unmarshal(apiResponse, &user, &personalInfo, &customErr)
+err := smarshal.Unmarshal(apiResponse, &user, &meta, &customErr)
 if err != nil {
 	...
 }
@@ -108,7 +109,7 @@ if user != nil {
 	...
 }
 
-if personalInfo != nil {
+if meta != nil {
 	...
 }
 ```
