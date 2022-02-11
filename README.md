@@ -2,7 +2,7 @@
 
 Smarshal (SMARt + unMARSHAL)
 
-(i'm just putting it out there beacuse i make use of it in few of my personal projects, contributions are welcome)
+(i'm just putting it out there beacuse i make use of it in few of my personal projects to replace boilerplate code in complex (not necessarily well designed) api responses, contributions are welcome)
 
 <a href="https://www.buymeacoffee.com/jakoboo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important; border-radius: 5px !important;" ></a>
 
